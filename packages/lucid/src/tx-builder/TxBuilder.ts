@@ -16,6 +16,7 @@ import {
   Script,
   ScriptType,
   StakeKeyHash,
+  TxOutput,
   UTxO,
 } from "@lucid-evolution/core-types";
 import * as Collect from "./internal/Collect.js";
@@ -43,6 +44,7 @@ export type TxBuilderConfig = {
   collectedInputs: UTxO[];
   readInputs: UTxO[];
   consumedInputs: UTxO[];
+  producingOutputs: TxOutput[];
   totalOutputAssets: Assets;
   mintedAssets: Assets;
   scripts: Map<string, { type: ScriptType; script: string }>;
@@ -212,6 +214,7 @@ export function makeTxBuilder(lucidConfig: LucidConfig): TxBuilder {
     collectedInputs: [],
     readInputs: [],
     consumedInputs: [],
+    producingOutputs: [],
     totalOutputAssets: {},
     mintedAssets: {},
     scripts: new Map(),

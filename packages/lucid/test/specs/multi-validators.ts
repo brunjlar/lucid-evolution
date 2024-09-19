@@ -228,7 +228,6 @@ export const registerSimpleStake = Effect.gen(function* ($) {
 
 export const mintAndWithdraw = Effect.gen(function* () {
   const { user } = yield* User;
-  const addr = yield* Effect.promise(() => user.wallet().address());
   const { stake, rewardAddress } = yield* SimpleStakeContract;
   const { mint, policyId } = yield* SimpleMintContract;
 

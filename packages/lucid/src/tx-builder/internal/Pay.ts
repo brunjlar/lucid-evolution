@@ -2,6 +2,7 @@ import { Effect, Scope } from "effect";
 import {
   addAssets,
   assetsToValue,
+  coreToTxOutput,
   toScriptRef,
   valueToAssets,
 } from "@lucid-evolution/utils";
@@ -49,6 +50,7 @@ export const payToAddress = (
       config.totalOutputAssets,
       valueToAssets(outputResult.output().amount()),
     );
+    config.producingOutputs.push(coreToTxOutput(outputResult.output()));
     config.txBuilder.add_output(outputResult);
   });
 
@@ -85,6 +87,7 @@ export const payToAddressWithData = (
       config.totalOutputAssets,
       valueToAssets(outputResult.output().amount()),
     );
+    config.producingOutputs.push(coreToTxOutput(outputResult.output()));
     config.txBuilder.add_output(outputResult);
   });
 
