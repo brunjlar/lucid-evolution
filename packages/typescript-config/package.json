@@ -2,6 +2,7 @@
   "name": "@lucid-evolution/typescript-config",
   "version": "0.2.3",
   "private": true,
+  "files": ["*.json"],
   "license": "MIT",
   "publishConfig": {
     "access": "public"

@@ -35,6 +35,7 @@
   "devDependencies": {
     "@types/node": "^20.12.8",
     "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@lucid-evolution/typescript-config": "workspace:*"
   }
 }

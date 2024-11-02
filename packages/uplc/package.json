@@ -15,5 +15,8 @@
     "build": "cp -r src dist",
     "clean-garbage": "rm src/browser/.gitignore src/browser/package.json src/node/.gitignore src/node/package.json",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@lucid-evolution/typescript-config": "workspace:*"
   }
 }
