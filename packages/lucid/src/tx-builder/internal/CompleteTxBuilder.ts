@@ -111,14 +111,14 @@ export const complete = (
     const walletInputs: UTxO[] =
       presetWalletInputs.length === 0
         ? yield* Effect.tryPromise({
-            try: () => wallet.getUtxos(),
-            catch: (error) => completeTxError(error),
-          })
+          try: () => wallet.getUtxos(),
+          catch: (error) => completeTxError(error),
+        })
         : presetWalletInputs;
 
     // Execute programs sequentially
     yield* Effect.all(config.programs);
-    const hasScriptExecutions: boolean = config.scripts.size > 0;
+    const hasScriptExecutions: boolean = TxBuilder.hasNonNativeScripts(config);
     // Set collateral input if there are script executions
     if (hasScriptExecutions) {
       const collateralInput = yield* findCollateral(
@@ -185,8 +185,8 @@ export const complete = (
         config.lucidConfig,
         canonical
           ? CML.Transaction.from_cbor_bytes(
-              transaction.to_canonical_cbor_bytes(),
-            )
+            transaction.to_canonical_cbor_bytes(),
+          )
           : transaction,
       ),
     );
@@ -709,8 +709,8 @@ const sumAssetsFromInputs = (inputs: UTxO[]) =>
   _Array.isEmptyArray(inputs)
     ? {}
     : inputs
-        .map((utxo) => utxo.assets)
-        .reduce((acc, cur) => Record.union(acc, cur, _BigInt.sum));
+      .map((utxo) => utxo.assets)
+      .reduce((acc, cur) => Record.union(acc, cur, _BigInt.sum));
 
 const calculateExtraLovelace = (
   leftoverAssets: Assets,

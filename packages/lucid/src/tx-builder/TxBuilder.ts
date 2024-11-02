@@ -57,6 +57,12 @@ export type TxBuilderConfig = {
   minFee: bigint | undefined;
 };
 
+export function hasNonNativeScripts(config: TxBuilderConfig): boolean {
+  return Array.from(config.scripts.values()).some(
+    (script) => script.type !== "Native",
+  );
+}
+
 export type TxBuilder = {
   readFrom: (utxos: UTxO[]) => TxBuilder;
   collectFrom: (
